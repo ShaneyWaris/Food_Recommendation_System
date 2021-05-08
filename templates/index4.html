@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename="style.css")}}">
+    <title>Document</title>
+
+    <style>
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            display: inline-block;
+        }
+
+        input[type="checkbox"][id^="cb"] {
+            display: none;
+        }
+
+        label {
+            border: 1px solid #fff;
+            padding: 10px;
+            display: block;
+            position: relative;
+            /* margin: 10px; */
+            margin-left: 10px;
+            cursor: pointer;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        label::before {
+            background-color: white;
+            color: white;
+            content: " ";
+            display: block;
+            border-radius: 50%;
+            border: 1px solid grey;
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            width: 25px;
+            height: 25px;
+            text-align: center;
+            line-height: 28px;
+            transition-duration: 0.4s;
+            transform: scale(0);
+        }
+
+        label img {
+            height: 200px;
+            width: 265px;
+            transition-duration: 0.2s;
+            transform-origin: 50% 50%;
+        }
+
+        :checked+label {
+            border-color: #ddd;
+        }
+
+        :checked+label::before {
+            content: "✓";
+            background-color: grey;
+            transform: scale(1);
+        }
+
+        :checked+label img {
+            transform: scale(0.9);
+            box-shadow: 0 0 20px #333;
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body style="background-image : url({{ url_for('static', filename="bg1.jpg")}});">
+    <!-- {{recipe_name}} -->
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+        <a class="navbar-brand my-3" href="#"><b>Food Recommendation System</b> &#128526;</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <!-- <a class="nav-link" href="#">All Items! <span class="sr-only">(current)</span></a> -->
+                    <!-- &nbsp;&nbsp;&nbsp; -->
+                    <a href="/most_popular_foods"><button class="btn btn-outline-success my-2 my-sm-0"><b>Most Popular
+                                Foods!</b></button></a>
+
+                </li>
+            </ul>
+            &nbsp;&nbsp;&nbsp;
+            <a href="/"><button class="btn btn-outline-success my-2 my-sm-0"><b>Start as a New User!</b></button></a>
+        </div>
+    </nav>
+
+
+
+
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-10 mx-auto flex flex-wrap">
+            <div class="lg:w-1/2 w-full mb-10 lg:mb-0 rounded-lg overflow-hidden text-center">
+                <div class="container px-5 py-0 mx-auto">
+                    <div class="flex flex-col text-center w-full mb-12">
+                        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900" style="font-family: 'Montserrat';">{{recipe_name}}
+                        </h1>
+                    </div>
+                </div>
+                <ul>
+                    <li>
+                        <div class="movie-content">
+                            <div class="card" style="width: 30rem;" title="title">
+                                <div class="imghvr">
+                                    <img class="card-img-top" height="360" width="240" alt="title - poster"
+                                        src={{recipe_url}}> </div>
+                                        <!-- <div class="card-body text-center">
+                                    <h5 class="card-title" >{{recipe_name}}</h5>
+                                </div> -->
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <!-- <img alt="feature" class="object-cover object-center h-full w-full" src="https://dummyimage.com/460x500"> -->
+            </div>
+            <!-- flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2 -->
+            <div class="flex flex-wrap flex-wrap lg:py-6 -mb-10 lg:w-1/2 lg:pl-12 lg:text-center text-center">
+
+                <div class="flex flex-col mb-10 lg:items-start items-center">
+                    <div class="flex-grow">
+                        <h2 class="text-gray-900 text-lg title-font font-medium mb-3"><b>Ingrediants!</b></h2>
+                        <p class="leading-relaxed text-base">Below are all the ingrediants which is used in this food!
+                        </p>
+
+                    </div>
+                </div>
+                {% for ingrediaant in ingred_list %}
+                <div class="p-1 sm:w-1/2 w-full">
+                    <div class="bg-yellow-50 rounded flex p-3 h-full items-center">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="3" class="text-green-500 w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
+                            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+                            <path d="M22 4L12 14.01l-3-3"></path>
+                        </svg>
+                        <span class="title-font font-medium">{{ingrediaant}}</span>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            </div>
+        </div>
+    </section>
+
+    <section class="text-gray-600 body-font relative">
+        <div class="container px-5 py-0 mx-auto">
+            <div class="flex flex-col text-center w-full mb-12">
+                <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900"  style="font-family: 'Montserrat';">You Might Also Like!
+                </h1>
+            </div>
+        </div>
+    </section>
+
+
+    {% if available %}
+    <ul>
+        {% for recipe_name, image_url in recipe_imageURL.items() %}
+        <li>
+            <div class="movie-content">
+                <div class="card" style="width: 15rem;" title="title">
+                    <div class="imghvr">
+                        <img class="card-img-top" height="360" width="240" alt="title - poster" src={{image_url}}>
+                        <figcaption class="fig bg-center">
+                            <a href="/about/{{recipe_name}}"><button class="card-btn btn btn-danger"> Click Me
+                                </button></a>
+                        </figcaption>
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{recipe_name}}</h5>
+                    </div>
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+
+
+
+</body>
+
+</html>

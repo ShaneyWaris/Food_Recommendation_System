@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <title>MIDAS Task 3: NLP</title>
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename="favicon.PNG")}}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename="style.css")}}" />
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <!-- <header class="text-gray-700 body-font" style="background-color: #3FADA8">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+
+        <span class="ml-3 text-xl" style="color: white;"><b>MIDAS Task 3: NLP</b></span>
+      </a>
+      <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center" style="color: white;">
+        <a class="mr-5 hover:text-gray-900" href="/">Home</a>
+        <a class="mr-5 hover:text-gray-900" href="/analysis">Data Analysis</a>
+        <a class="mr-5 hover:text-gray-900" href="/readme">ReadMe</a>
+        <a class="mr-5 hover:text-gray-900" href="/about">About</a>
+      </nav>
+    </div>
+  </header> -->
+
+  <form action="/" method="post" role="form">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-col text-center w-full mb-12">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Food Recommendation System &#128526;
+        </h1>
+      </div>
+  </form>
+
+  <div class="movie-content">
+    <div class="card" style="width: 15rem;" title="title" onclick="recommendcard(this)">
+      <div class="imghvr">
+        <img class="card-img-top" height="360" width="240" alt="title - poster"
+          src=https://images.media-allrecipes.com/userphotos/720x405/606388.jpg> <figcaption class="fig bg-center">
+        <button class="card-btn btn btn-danger"> Click Me </button>
+        </figcaption>
+      </div>
+      <div class="card-body text-center">
+        <h5 class="card-title">shaney</h5>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  
+
+  <!-- <div class="wrapper " style="background-color: green; margin: 0px"> -->
+<!-- 
+  <div class="container" style="background-color: green; margin: 0px">
+      
+      <label class="option_item">
+        <div class="card" style="width: 20rem; height: 18rem;" title="title">
+          <input type="checkbox" class="checkbox">
+          <div class="option_inner quora">
+            <div class="tickmark"></div>
+            <img class="card-img-top" height="360" width="240" alt="title - poster"
+              src=https://images.media-allrecipes.com/userphotos/720x405/606388.jpg> <div class="card-body text-center">
+            <h5 class="card-title">shaney</h5>
+          </div>
+        </div>
+      </label>
+
+      <label class="option_item">
+        <div class="card" style="width: 20rem; height: 18rem;" title="title">
+          <input type="checkbox" class="checkbox">
+          <div class="option_inner quora">
+            <div class="tickmark"></div>
+            <img class="card-img-top" height="360" width="240" alt="title - poster"
+              src=https://images.media-allrecipes.com/userphotos/720x405/606388.jpg> <div class="card-body text-center">
+            <h5 class="card-title">shaney</h5>
+          </div>
+        </div>
+      </label>
+    </div>
+  </div> -->
+
+<!-- 
+  <table class="table-auto" style='border-collapse: separate;
+  border-spacing: 100px 0;'>
+
+    <tbody>
+      <tr>
+        <td style="padding: 10px 0;">
+          <label class="option_item">
+            <div class="card" style="width: 20rem; height: 18rem;" title="title">
+              <input type="checkbox" class="checkbox">
+              <div class="option_inner quora">
+                <div class="tickmark"></div>
+                <img class="card-img-top" height="360" width="240" alt="title - poster"
+                  src=https://images.media-allrecipes.com/userphotos/720x405/606388.jpg> <div class="card-body text-center">
+                <h5 class="card-title">shaney</h5>
+              </div>
+            </div>
+          </label>
+        </td>
+        <td style="padding: 10px 0;">
+          <label class="option_item">
+            <div class="card" style="width: 20rem; height: 18rem;" title="title">
+              <input type="checkbox" class="checkbox">
+              <div class="option_inner quora">
+                <div class="tickmark"></div>
+                <img class="card-img-top" height="360" width="240" alt="title - poster"
+                  src=https://images.media-allrecipes.com/userphotos/720x405/606388.jpg> <div class="card-body text-center">
+                <h5 class="card-title">shaney</h5>
+              </div>
+            </div>
+          </label>
+        </td>
+        <td style="padding: 10px 0;">
+          <label class="option_item">
+            <div class="card" style="width: 20rem; height: 18rem;" title="title">
+              <input type="checkbox" class="checkbox">
+              <div class="option_inner quora">
+                <div class="tickmark"></div>
+                <img class="card-img-top" height="360" width="240" alt="title - poster"
+                  src=https://images.media-allrecipes.com/userphotos/720x405/606388.jpg> <div class="card-body text-center">
+                <h5 class="card-title">shaney</h5>
+              </div>
+            </div>
+          </label>
+        </td>
+      </tr>
+    </tbody>
+  </table> -->
+
+
+
+
+
+
+
+</body>
+
+</html>
