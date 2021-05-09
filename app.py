@@ -1,12 +1,11 @@
-import joblib
-from ib import *
-from ub import *
+from item_based import *
+from user_based import *
 from flask import Flask, render_template, request, url_for, redirect
-import os
+import os, joblib
 app = Flask(__name__)
 
-df = joblib.load('./df.pkl')
-ingred_df = joblib.load('./ingred_df.pkl')
+df = joblib.load('./Dataset/df.pkl')
+ingred_df = joblib.load('./Dataset/ingred_df.pkl')
 recipe_imageURL = {}
 userId = -1
 
@@ -28,7 +27,6 @@ def recommended_items():
 def hello_world():
     available = False
     if request.method == 'POST':
-
         d = {key: 0 for key in range(0, 1398)}
         for i in range(0, 1398):
             d[i] = request.form.get(str(i))
@@ -39,25 +37,34 @@ def hello_world():
             else:
                 vector.append(5)
 
+        any_favourite = False
+        for i in vector:
+            if i != 0:
+                any_favourite = True
+                break
+        global userId
+        # if any_favourite == False:
+        #     print("=====>", userId)
+
         global df
-        pt_df = pd.pivot_table(df, values='Rating',
-                               index='userId', columns='itemId')
+        pt_df = pd.pivot_table(df, values='Rating',index='userId', columns='itemId', aggfunc=np.sum)
         pt_df = pt_df.fillna(0)
 
         df2 = pd.DataFrame([vector], columns=list(pt_df.columns))
 
         pt_df = pt_df.append(df2, ignore_index=True)
 
-        global userId
-        userId = list(pt_df.index)[-1]
         
+        userId = list(pt_df.index)[-1]
 
         l = [[userId, itemId, 5, "", ""]
              for itemId, rating in d.items() if rating != None]
+
         df = df.append(pd.DataFrame(
             l, columns=list(df.columns)), ignore_index=True)
 
-        items_list = UB_MAE(userId, df, pt_df, 1)
+        items_list = UB_MAE(userId, df, pt_df, 1)  # 1816, not added in df, 
+
 
         global recipe_imageURL
         for itemId in items_list:
@@ -78,7 +85,6 @@ def about(recipe_name):
     menu_df = df.drop_duplicates(subset=['recipe_name']).reset_index(drop=True)
     recipeName_recipeId = {rn: ri for rn, ri in zip(menu_df['recipe_name'].tolist(), menu_df['itemId'].tolist())}
     itemId = recipeName_recipeId[recipe_name]
-    print("\n\n\n\n\n\n\n\n\n\n\n\n*************** =>", userId, "\n\n\n\n\n\n\n\n\n\n\n\n")
     similar_items = IB_MAE(userId, itemId, df, 15)
 
     global ingred_df

@@ -109,7 +109,7 @@ def predict_rating_IB(userId, itemId, train_pt_df, sm_df, K):
 # This function takes the training & testing dataframes and return the MAE.
 def IB_MAE(userId, itemId, train_df, K):
     # pivot the training dataframe and Transpose it.
-    train_pt_df = pd.pivot_table(train_df, values='Rating', index='userId', columns='itemId').T
+    train_pt_df = pd.pivot_table(train_df, values='Rating', index='userId', columns='itemId', aggfunc=np.sum).T
     # Replace the NA values with 0   (Note: I observed -> No user in the whole dataset have rated 0 to any movie)
     train_pt_df = train_pt_df.fillna(0)
     
