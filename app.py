@@ -2,6 +2,8 @@ from item_based import *
 from user_based import *
 from flask import Flask, render_template, request, url_for, redirect
 import os, joblib
+import numpy as np
+import pandas as pd
 app = Flask(__name__)
 
 df = joblib.load('./Dataset/df.pkl')
