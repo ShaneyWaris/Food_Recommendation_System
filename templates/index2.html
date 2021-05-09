@@ -111,15 +111,13 @@
         </li>
       </ul>
       &nbsp;&nbsp;&nbsp;
-        <!-- <a href="/"><button class="btn btn-outline-success my-2 my-sm-0"><b>Start as a New User!</b></button></a> -->
+        <a href="/"><button class="btn btn-outline-success my-2 my-sm-0"><b>Start as a New User!</b></button></a>
     </div>
   </nav>
 
-
-
   <form action="/" method="post" role="form">
     <section class="text-gray-600 body-font relative">
-      <div class="container px-5 py-10 mx-auto">
+      <div class="container px-3 py-10 mx-auto">
         <div class="flex flex-col text-center w-full mb-15">
           <!-- <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Food Recommendation
                         System &#128526;</h1> -->
@@ -129,6 +127,13 @@
                 foods from the below list, so that we
                 can start recommending foods to you based on your choices!</p>
             </li>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for msg in messages %}
+              <p style="font-size: 20px; color: red;"><b>{{msg}}</b></p>
+              {% endfor %}
+              {% endif %}
+              {% endwith %}
             <li>
               <button type="submit"
                 class="flex mx-auto text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">Click Me after selecting foods!</button>

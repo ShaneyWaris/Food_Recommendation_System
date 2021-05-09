@@ -1,10 +1,12 @@
 from item_based import *
 from user_based import *
-from flask import Flask, render_template, request, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect, flash
 import os, joblib
 import numpy as np
 import pandas as pd
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
 
 df = joblib.load('./Dataset/df.pkl')
 ingred_df = joblib.load('./Dataset/ingred_df.pkl')
@@ -45,8 +47,9 @@ def hello_world():
                 any_favourite = True
                 break
         global userId
-        # if any_favourite == False:
-        #     print("=====>", userId)
+        if any_favourite == False:
+            flash("Pleas SELECT atleast ONE FOOD from the below list, else we can't give you better recommendations!")
+            return render_template('index2.html')
 
         global df
         pt_df = pd.pivot_table(df, values='Rating',index='userId', columns='itemId', aggfunc=np.sum)
