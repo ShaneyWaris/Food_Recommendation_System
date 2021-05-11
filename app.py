@@ -5,7 +5,7 @@ import os, joblib
 import numpy as np
 import pandas as pd
 app = Flask(__name__)
-app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+app.secret_key = b'_4#y2L"F4Q8z\n\xec]/'
 
 
 df = joblib.load('./Dataset/df.pkl')

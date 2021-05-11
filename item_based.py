@@ -1,11 +1,8 @@
 import numpy as np
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.metrics import mean_absolute_error
-from sklearn.metrics import mean_squared_error
 from tqdm import tqdm
-from sklearn.model_selection import train_test_split
-import math, joblib
+
 
 def uar(userId, train_pt_df):
     l = [x for x in list(train_pt_df.loc[userId]) if x != 0]
